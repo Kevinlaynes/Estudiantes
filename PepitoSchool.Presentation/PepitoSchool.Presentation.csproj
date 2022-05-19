@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PepitoSchool.AppCore\PepitoSchool.AppCore.csproj" />
     <ProjectReference Include="..\PepitoSchool.Domain\PepitoSchool.Domain.csproj" />
   </ItemGroup>
 

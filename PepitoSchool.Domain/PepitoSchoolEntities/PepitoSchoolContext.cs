@@ -2,12 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using PepitoSchool.Domain.Entities;
+using PepitoSchool.Domain.Interfaces;
 
 #nullable disable
 
 namespace PepitoSchool.Domain.PepitoSchoolEntities
 {
-    public partial class PepitoSchoolContext : DbContext
+    public partial class PepitoSchoolContext : DbContext,IPepitoSchoolContext
     {
         public PepitoSchoolContext()
         {
@@ -19,19 +20,20 @@ namespace PepitoSchool.Domain.PepitoSchoolEntities
         }
 
         public virtual DbSet<Estudiante> Estudiantes { get; set; }
+        public DbSet<Estudiante> estudiantes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=JADPA20\\SQLSERVER2019;Initial Catalog=PepitoSchool;user=sa;password=123456");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//                optionsBuilder.UseSqlServer("Data Source=FAMILIA;Initial Catalog=PepitoSchool;Integrated Security=True");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<Estudiante>(entity =>
             {
